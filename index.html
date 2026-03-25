@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Calidad | Arq. David Lindoro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #c5a059; --dark: #121212; --grey: #2a2a2a; --text: #e0e0e0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        #survey-card { width: 100%; max-width: 450px; padding: 40px; border-left: 3px solid var(--gold); background: #1a1a1a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 50px; line-height: 1.6; font-weight: 500; }
+        .step { display: none; animation: fadeIn 0.6s ease; }
+        .step.active { display: block; }
+        p { font-size: 1.1rem; margin-bottom: 35px; font-weight: 300; line-height: 1.5; }
+        
+        /* Escalas de 1 a 5 */
+        .scale { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .item { width: 50px; height: 50px; border: 1px solid var(--grey); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .item:hover { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.1); }
+        .labels { display: flex; justify-content: space-between; font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        /* Botones de opción */
+        .btn { background: transparent; border: 1px solid var(--grey); color: var(--text); padding: 16px; width: 100%; margin-bottom: 12px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; text-align: left; padding-left: 20px; font-size: 0.9rem; }
+        .btn:hover { border-color: var(--gold); color: var(--gold); padding-left: 25px; }
+
+        #thanks { display: none; text-align: center; }
+        #thanks h2 { color: var(--gold); font-weight: 300; margin-bottom: 20px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div id="survey-card">
+    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size: 0.6rem; color: #666; letter-spacing: 2px;">CONSULTOR ESTRATÉGICO</span></h1>
+
+    <div class="step active" id="s1">
+        <p>1. ¿Cómo califica la seguridad técnica y legal brindada en su proyecto?</p>
+        <div class="scale">
+            <div class="item" onclick="next(1, 1)">1</div><div class="item" onclick="next(1, 2)">2</div><div class="item" onclick="next(1, 3)">3</div><div class="item" onclick="next(1, 4)">4</div><div class="item" onclick="next(1, 5)">5</div>
+        </div>
+        <div class="labels"><span>Básica</span><span>Excelencia Arquitectónica</span></div>
+    </div>
+
+    <div class="step" id="s2">
+        <p>2. ¿Considera que la asesoría profesional aumentó el valor de su propiedad?</p>
+        <button class="btn" onclick="next(2, 'Alto')">Mucho más de lo invertido</button>
+        <button class="btn" onclick="next(2, 'Medio')">Lo justo (Valor de mercado)</button>
+        <button class="btn" onclick="next(2, 'Bajo')">No estoy seguro</button>
+    </div>
+
+    <div class="step" id="s3">
+        <p>3. ¿Nivel de satisfacción con la estética y confort logrado (Diseño de Autor)?</p>
+        <div class="scale">
+            <div class="item" onclick="next(3, 1)">1</div><div class="item" onclick="next(3, 2)">2</div><div class="item" onclick="next(3, 3)">3</div><div class="item" onclick="next(3, 4)">4</div><div class="item" onclick="next(3, 5)">5</div>
+        </div>
+        <div class="labels"><span>Funcional</span><span>Bienestar Superior</span></div>
+    </div>
+
+    <div class="step" id="s4">
+        <p>4. ¿Qué valor le asigna a contar con un Arquitecto frente a una obra sin dirección?</p>
+        <div class="scale">
+            <div class="item" onclick="next(4, 1)">1</div><div class="item" onclick="next(4, 2)">2</div><div class="item" onclick="next(4, 3)">3</div><div class="item" onclick="next(4, 4)">4</div><div class="item" onclick="next(4, 5)">5</div>
+        </div>
+        <div class="labels"><span>Poco Valor</span><span>Indispensable</span></div>
+    </div>
+
+    <div class="step" id="s5">
+        <p>5. ¿Recomendaría nuestros servicios de consultoría estratégica?</p>
+        <button class="btn" onclick="finish(5, 'Sí')">Definitivamente sí</button>
+        <button class="btn" onclick="finish(5, 'Tal vez')">Probablemente</button>
+        <button class="btn" onclick="finish(5, 'No')">No por el momento</button>
+    </div>
+
+    <div id="thanks">
+        <h2>¡Gracias!</h2>
+        <p style="font-size: 0.9rem; color: #888;">Su validación confirma nuestro estándar de excelencia profesional.</p>
+        <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
+            <span style="letter-spacing: 3px; font-size: 0.6rem; color: var(--gold);">FIRMA DE AUTOR</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    let responses = {};
+    // REemplace con su URL de Google Apps Script que ya tiene activa
+    const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbyk0-xAuRuSQ4IifXwr8rwPdv3KY_haCWeCarmDpRhlSakJJHbJV5cOMbIwjkzxXnVD/exec";
+
+    function next(stepId, value) {
+        responses['pregunta_' + stepId] = value;
+        document.getElementById('s' + stepId).classList.remove('active');
+        document.getElementById('s' + (stepId + 1)).classList.add('active');
+    }
+
+    function finish(stepId, value) {
+        responses['pregunta_' + stepId] = value;
+        
+        // Ocultar última pregunta y mostrar gracias
+        document.getElementById('s' + stepId).classList.remove('active');
+        document.getElementById('thanks').style.display = 'block';
+
+        // Enviar a Google Sheets
+        fetch(GOOGLE_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            body: JSON.stringify(responses)
+        }).catch(err => console.log("Finalizado"));
+    }
+</script>
+
+</body>
+</html>
