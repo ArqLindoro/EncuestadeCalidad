@@ -106,6 +106,41 @@
             cache: 'no-cache',
             body: JSON.stringify(responses)
         }).catch(err => console.log("Finalizado"));
+
+function finish(stepId, value) {
+    responses['pregunta_' + stepId] = value;
+    
+    // 1. Enviar a Google Sheets (Silencioso)
+    fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(responses) });
+
+    // 2. Mostrar mensaje de agradecimiento y el botón de WhatsApp
+    document.getElementById('s' + stepId).classList.remove('active');
+    document.getElementById('thanks').style.display = 'block';
+
+    // 3. Crear el mensaje para WhatsApp
+    let mensaje = `*REPORTE DE CALIDAD - ARQ. DAVID LINDORO*%0A` +
+                  `------------------------------%0A` +
+                  `Seguridad Técnica: ${responses.pregunta_1}/5%0A` +
+                  `Plusvalía: ${responses.pregunta_2}%0A` +
+                  `Diseño de Autor: ${responses.pregunta_3}/5%0A` +
+                  `Valor Arq vs Obra: ${responses.pregunta_4}/5%0A` +
+                  `Recomienda: ${responses.pregunta_5}`;
+
+    let miTelefono = "5212221774020"; // <--- PONGA AQUÍ SU TELÉFONO (Con código de país, ej: 521 para México)
+    
+    // Crear el botón dinámicamente
+    let btnWhatsapp = document.createElement("button");
+    btnWhatsapp.className = "btn";
+    btnWhatsapp.style.borderColor = "var(--gold)";
+    btnWhatsapp.style.color = "var(--gold)";
+    btnWhatsapp.style.marginTop = "20px";
+    btnWhatsapp.innerHTML = "CONFIRMAR ENVÍO POR WHATSAPP";
+    btnWhatsapp.onclick = function() {
+        window.open(`https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensaje}`, '_blank');
+    };
+    
+    document.getElementById('thanks').appendChild(btnWhatsapp);
+}
     }
 </script>
 
