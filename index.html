@@ -6,43 +6,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a059; --dark: #121212; --text: #e0e0e0; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        #survey-card { width: 100%; max-width: 400px; padding: 30px; border-left: 3px solid var(--gold); background: #1a1a1a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 40px; text-align: center; }
-        .step { display: none; } .step.active { display: block; animation: fadeIn 0.5s; }
-        p { font-size: 1rem; margin-bottom: 25px; font-weight: 300; text-align: center; }
-        .btn { background: transparent; border: 1px solid #333; color: white; padding: 15px; width: 100%; margin-bottom: 10px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; text-align: center; }
-        .btn:hover { border-color: var(--gold); color: var(--gold); }
-        .scale { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .item { width: 45px; height: 45px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        #survey-card { width: 100%; max-width: 420px; padding: 40px; border-left: 3px solid var(--gold); background: #1a1a1a; box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center; }
+        h1 { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 45px; }
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.6s; }
+        p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; line-height: 1.4; }
+        .btn-opt { background: transparent; border: 1px solid #333; color: white; padding: 16px; width: 100%; margin-bottom: 12px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; }
+        .btn-opt:hover { border-color: var(--gold); color: var(--gold); background: rgba(197,160,89,0.05); }
+        .scale { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .item { width: 48px; height: 48px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .item:hover { border-color: var(--gold); color: var(--gold); }
-        #thanks { display: none; text-align: center; }
+        .labels { display: flex; justify-content: space-between; font-size: 0.6rem; color: #666; text-transform: uppercase; margin-bottom: 25px; }
+        
+        /* Botón de WhatsApp Final */
+        #btn-wa { display: none; background: var(--gold); color: var(--dark); border: none; padding: 20px; width: 100%; font-weight: 500; font-size: 1rem; cursor: pointer; margin-top: 20px; letter-spacing: 1px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div id="survey-card">
-    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">ESTATUS PROFESIONAL</span></h1>
+    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">VALOR PATRIMONIAL</span></h1>
 
     <div class="step active" id="s1">
         <p>1. ¿Calidad técnica y legal recibida?</p>
         <div class="scale">
             <div class="item" onclick="next(1, 1)">1</div><div class="item" onclick="next(1, 2)">2</div><div class="item" onclick="next(1, 3)">3</div><div class="item" onclick="next(1, 4)">4</div><div class="item" onclick="next(1, 5)">5</div>
         </div>
+        <div class="labels"><span>Básica</span><span>Excelencia</span></div>
     </div>
 
     <div class="step" id="s2">
         <p>2. ¿El diseño aumentó el valor de su propiedad?</p>
-        <button class="btn" onclick="next(2, 'Alto')">Mucho más de lo invertido</button>
-        <button class="btn" onclick="next(2, 'Lo Justo')">Lo esperado</button>
+        <button class="btn-opt" onclick="next(2, 'Alto')">Mucho más de lo invertido</button>
+        <button class="btn-opt" onclick="next(2, 'Medio')">Lo justo (Mercado)</button>
     </div>
 
     <div class="step" id="s3">
-        <p>3. ¿Satisfacción con el Confort y Estética?</p>
+        <p>3. ¿Nivel de satisfacción estética y confort?</p>
         <div class="scale">
             <div class="item" onclick="next(3, 1)">1</div><div class="item" onclick="next(3, 2)">2</div><div class="item" onclick="next(3, 3)">3</div><div class="item" onclick="next(3, 4)">4</div><div class="item" onclick="next(3, 5)">5</div>
         </div>
+        <div class="labels"><span>Funcional</span><span>Bienestar Superior</span></div>
     </div>
 
     <div class="step" id="s4">
@@ -50,24 +56,26 @@
         <div class="scale">
             <div class="item" onclick="next(4, 1)">1</div><div class="item" onclick="next(4, 2)">2</div><div class="item" onclick="next(4, 3)">3</div><div class="item" onclick="next(4, 4)">4</div><div class="item" onclick="next(4, 5)">5</div>
         </div>
+        <div class="labels"><span>Poco Valor</span><span>Indispensable</span></div>
     </div>
 
     <div class="step" id="s5">
         <p>5. ¿Recomendaría nuestra Consultoría?</p>
-        <button class="btn" onclick="finish(5, 'Sí')">Definitivamente</button>
-        <button class="btn" onclick="finish(5, 'No')">No por ahora</button>
+        <button class="btn-opt" onclick="finish(5, 'Sí')">Definitivamente</button>
+        <button class="btn-opt" onclick="finish(5, 'No')">No por ahora</button>
     </div>
 
-    <div id="thanks">
-        <h2 style="color:var(--gold); font-weight:300;">PROCESANDO...</h2>
-        <p style="font-size:0.8rem; color:#888;">Validando reporte de estatus.</p>
+    <div id="final-area" style="display:none;">
+        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">RESPUESTAS REGISTRADAS</h2>
+        <p style="font-size:0.8rem; color:#888;">Para finalizar y validar su reporte con el Arq. Lindoro, presione el botón inferior:</p>
+        <button id="btn-wa" onclick="sendWA()">NOTIFICAR AL ARQUITECTO</button>
     </div>
 </div>
 
 <script>
     let res = {};
-    const MI_TELEFONO = "5212221774020"; // <--- PONGA SU NÚMERO AQUÍ (Código país + número)
-    const GOOGLE_URL = "SU_URL_DE_GOOGLE_QUE_YA_TIENE"; 
+    const TEL = "522221774020"; // <--- CAMBIE ESTO POR SU NÚMERO REAL
+    const G_URL = "https://script.google.com/macros/s/AKfycbyk0-xAuRuSQ4IifXwr8rwPdv3KY_haCWeCarmDpRhlSakJJHbJV5cOMbIwjkzxXnVD/exec"; 
 
     function next(s, v) {
         res['p'+s] = v;
@@ -78,23 +86,23 @@
     function finish(s, v) {
         res['p'+s] = v;
         document.getElementById('s5').classList.remove('active');
-        document.getElementById('thanks').style.display = 'block';
+        document.getElementById('final-area').style.display = 'block';
+        document.getElementById('btn-wa').style.display = 'block';
+        
+        // Guardar en Excel (Silencioso)
+        fetch(G_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(res) });
+    }
 
-        // 1. Enviar a Google Sheets (Silencioso)
-        fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(res) });
-
-        // 2. Redirección Automática a WhatsApp con el reporte redactado
-        let msg = `*REPORTE DE ESTATUS - ARQ. LINDORO*%0A` +
+    function sendWA() {
+        let msg = `*EVALUACIÓN DE CALIDAD - ARQ. LINDORO*%0A` +
                   `------------------------------%0A` +
                   `1. Tec/Legal: ${res.p1}/5%0A` +
                   `2. Plusvalía: ${res.p2}%0A` +
                   `3. Estética: ${res.p3}/5%0A` +
-                  `4. Val. Arquitecto: ${res.p4}/5%0A` +
+                  `4. Val. Arq: ${res.p4}/5%0A` +
                   `5. Recomienda: ${res.p5}`;
-
-        setTimeout(() => {
-            window.location.href = `https://api.whatsapp.com/send?phone=${MI_TELEFONO}&text=${msg}`;
-        }, 1500); // Espera 1.5 seg para que el cliente vea el "Gracias" y luego salta a WhatsApp
+        
+        window.open(`https://api.whatsapp.com/send?phone=${TEL}&text=${msg}`, '_blank');
     }
 </script>
 </body>
